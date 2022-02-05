@@ -36,7 +36,7 @@ function useRoutes(routes) {
     let { path, element } = routes[i];
     let match = matchPath(path, pathname)
     if (match) {
-      return element
+      return React.cloneElement(element, {...element.props, match})
     }
   }
 }
@@ -47,9 +47,16 @@ function useRoutes(routes) {
  * @param pathname
  */
 function matchPath(path, pathname) {
-  let matcher = compilePath(path);
+  let [matcher, paramNames] = compilePath(path);
   let match = pathname.match(matcher)
-  return match
+  if (!match) return null
+  let matchedPathname = match[0]; // 匹配到的路径
+  let values = match.slice(1) // 分组的值，也就是路径参数的数组
+  let params = paramNames.reduce((memo, paramNames, index) => {
+    memo[paramNames] = values[index]
+    return memo
+  }, {})
+  return {params, pathname: matchedPathname, path}
 }
 
 /**
@@ -57,10 +64,14 @@ function matchPath(path, pathname) {
  * @param path 路径
  */
 function compilePath(path) {
-  let regexpSource = "^" + path;
+  let paramNames = []
+  let regexpSource = "^" + path.replace(/:(\w+)/g, (_, key) => {
+    paramNames.push(key);
+    return "([^\\/]+)"
+  });
   regexpSource += '$';
   let matcher = new RegExp(regexpSource)
-  return matcher
+  return [matcher, paramNames]
 }
 
 function createRoutesFromChildren(children) {
