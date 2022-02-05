@@ -1,6 +1,6 @@
 import React from 'react'
 import { Router } from "../react-router";
-import { createBrowserHistory, createHashHistory } from "history";
+import { createBrowserHistory, createHashHistory } from "../history";
 export * from '../react-router'
 
 /**
@@ -19,7 +19,9 @@ function BrowserRouter({children}) {
     location: history.location
   })
   React.useLayoutEffect(() => {
-    history.listen(setState)
+    history.listen(({location, action}) => {
+      setState({location, action})
+    })
   }, [history])
 
   return (
