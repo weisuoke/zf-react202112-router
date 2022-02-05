@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router, useNavigate } from "../react-router";
+import { Router, useNavigate, useLocation } from "../react-router";
 import { createBrowserHistory, createHashHistory } from "../history";
 export * from '../react-router'
 
@@ -77,5 +77,33 @@ export function Link({to, ...rest}) {
   }
   return (
     <a {...rest} href={to} onClick={handleClick} />
+  )
+}
+
+export function NavLink({
+  className: classNameProp = '',  // 类名,可能是一个字符串，也可能是一个函数
+  end = false,  // 是否结束
+  style: styleProp = {},  // 样式，可能是一个对象也可以时一个函数
+  to, // 跳转到哪里
+  children, // 儿子
+  ...rest
+}) {
+  let location = useLocation();
+  // 当前地址栏中的实际路径
+  let pathname = location.pathname
+  // 要匹配的路径
+  let path = {pathname: to}
+  let toPathname = path.pathname;
+  let isActive = pathname === to
+    || (!end && pathname.startsWith(to) && pathname.charAt(to.length) === '/')
+  let className
+  if (typeof classNameProp === 'function') {
+    className = classNameProp({ isActive })
+  } else {
+    className = classNameProp;
+  }
+  let style = typeof styleProp === 'function' ? styleProp({ isActive }) : styleProp;
+  return (
+    <Link {...rest} className={className} style={style} to={to}>{children}</Link>
   )
 }

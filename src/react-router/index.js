@@ -21,7 +21,7 @@ function Router({children, navigator, location}) {
   )
 }
 
-function useLocation() {
+export function useLocation() {
   return React.useContext(LocationContext).location
 }
 
