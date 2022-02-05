@@ -99,3 +99,11 @@ export function useNavigate() {
   },[navigator])
   return navigate
 }
+
+export function Navigate({ to }) {
+  let navigate = useNavigate()
+  React.useEffect(() => {
+    navigate(to)
+  })
+  return null
+}

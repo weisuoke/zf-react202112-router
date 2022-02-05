@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {HashRouter, BrowserRouter, Routes, Route, Link, NavLink} from './react-router-dom';
+import {HashRouter, BrowserRouter, Routes, Route, Link, NavLink, Navigate} from './react-router-dom';
 import Home from './components/Home';
 import User from './components/User';
 import Profile from './components/Profile';
+import Protected from './components/Protected'
+import Login from './components/Login'
 import Post from './components/Post';
 
 const activeStyle = { backgroundColor: 'red' }
@@ -26,8 +28,10 @@ ReactDOM.render(
     <Routes>
       <Route path="/" element={<Home name="zhufeng" />} />
       <Route path="/user" element={<User />} />
-      <Route path="/profile" element={<Profile />}/>
+      <Route path="/profile" element={<Protected component={Profile} path={'/profile'}/>}/>
       <Route path="/post/:id" element={<Post />}/>
+      <Route path="/login" element={<Login />}/>
+      <Route path="/home" element={<Navigate to="/" />}/>
     </Routes>
   </BrowserRouter>
   ,document.getElementById('root'));
