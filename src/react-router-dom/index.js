@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router } from "../react-router";
+import { Router, useNavigate } from "../react-router";
 import { createBrowserHistory, createHashHistory } from "../history";
 export * from '../react-router'
 
@@ -67,4 +67,15 @@ function HashRouter({ children }) {
 export {
   BrowserRouter,
   HashRouter
+}
+
+export function Link({to, ...rest}) {
+  let navigator = useNavigate() // navigate history
+  function handleClick(event) {
+    event.preventDefault();
+    navigator(to)
+  }
+  return (
+    <a {...rest} href={to} onClick={handleClick} />
+  )
 }

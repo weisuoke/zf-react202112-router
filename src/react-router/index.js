@@ -91,3 +91,11 @@ function Route(props) {
 }
 
 export {Router, Routes, Route}
+
+export function useNavigate() {
+  let {navigator} = React.useContext(NavigationContext)
+  let navigate = React.useCallback((to) => {
+    navigator.push(to)
+  },[navigator])
+  return navigate
+}
