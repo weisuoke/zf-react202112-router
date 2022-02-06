@@ -1,5 +1,5 @@
 import React from 'react';
-import {useNavigate} from "../react-router";
+import {useNavigate} from "../origin/react-router";
 
 function Home(props) {
   let navigate = useNavigate()

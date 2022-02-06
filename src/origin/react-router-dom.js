@@ -10,8 +10,8 @@
  */
 import { useRef, useState, useLayoutEffect, createElement, forwardRef, useCallback, useMemo } from 'react';
 import { createBrowserHistory, createHashHistory, createPath } from 'history';
-import { Router, useHref, useLocation, useResolvedPath, useNavigate } from 'react-router';
-export { MemoryRouter, Navigate, Outlet, Route, Router, Routes, UNSAFE_LocationContext, UNSAFE_NavigationContext, UNSAFE_RouteContext, createRoutesFromChildren, generatePath, matchPath, matchRoutes, renderMatches, resolvePath, useHref, useInRouterContext, useLocation, useMatch, useNavigate, useNavigationType, useOutlet, useOutletContext, useParams, useResolvedPath, useRoutes } from 'react-router';
+import { Router, useHref, useLocation, useResolvedPath, useNavigate } from './react-router';
+export { MemoryRouter, Navigate, Outlet, Route, Router, Routes, UNSAFE_LocationContext, UNSAFE_NavigationContext, UNSAFE_RouteContext, createRoutesFromChildren, generatePath, matchPath, matchRoutes, renderMatches, resolvePath, useHref, useInRouterContext, useLocation, useMatch, useNavigate, useNavigationType, useOutlet, useOutletContext, useParams, useResolvedPath, useRoutes } from './react-router';
 
 function _extends() {
   _extends = Object.assign || function (target) {

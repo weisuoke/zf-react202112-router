@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {HashRouter, BrowserRouter, Routes, Route, Link, NavLink, Navigate} from './react-router-dom';
+import {HashRouter, BrowserRouter, Routes, Route, Link, NavLink, Navigate} from './origin/react-router-dom';
 import Home from './components/Home';
 import User from './components/User';
+import UserList from './components/UserList';
+import UserAdd from './components/UserAdd';
+import UserDetail from './components/UserDetail';
 import Profile from './components/Profile';
 import Protected from './components/Protected'
 import Login from './components/Login'
@@ -27,7 +30,11 @@ ReactDOM.render(
     </ul>
     <Routes>
       <Route path="/" element={<Home name="zhufeng" />} />
-      <Route path="/user" element={<User />} />
+      <Route path="/user/*" element={<User />}>
+        <Route path="add" element={<UserAdd />} />
+        <Route path="list" element={<UserList />} />
+        <Route path="detail/:id" element={<UserDetail />} />
+      </Route>
       <Route path="/profile" element={<Protected component={Profile} path={'/profile'}/>}/>
       <Route path="/post/:id" element={<Post />}/>
       <Route path="/login" element={<Login />}/>

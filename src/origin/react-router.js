@@ -131,6 +131,7 @@ function Navigate(_ref2) {
   !useInRouterContext() ? process.env.NODE_ENV !== "production" ? invariant(false, // TODO: This error is probably because they somehow have 2 versions of
     // the router loaded. We can help them understand how to avoid that.
     "<Navigate> may be used only in the context of a <Router> component.") : invariant(false) : void 0;
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   process.env.NODE_ENV !== "production" ? warning(!useContext(NavigationContext).static, "<Navigate> must not be used on the initial render in a <StaticRouter>. " + "This is a no-op, but you should modify your code so the <Navigate> is " + "only ever rendered in response to some user interaction or state change.") : void 0;
   let navigate = useNavigate();
   useEffect(() => {
